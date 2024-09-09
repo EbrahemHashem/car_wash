@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:car_wash/feature/wash_service/presentation/views/services/marker_model.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -31,23 +31,10 @@ class _CustomMapState extends State<CustomMap> {
     }
     if (permission == LocationPermission.whileInUse) {
       Position position = await Geolocator.getCurrentPosition();
-      print(position.latitude);
-      print(position.longitude);
+      debugPrint('${position.latitude}');
+      debugPrint('${position.longitude}');
     }
 // AIzaSyBzKFU-TDLRO2kAoHAdgiil4zPw2GrC9OE
-    // permission = await Geolocator.checkPermission();
-    // if (permission == LocationPermission.denied) {
-    //   permission = await Geolocator.requestPermission();
-    //   if (permission == LocationPermission.denied) {
-    //     return Future.error('Location permissions are denied');
-    //   }
-    // }
-
-    // if (permission == LocationPermission.deniedForever) {
-    //   return Future.error('Location permissions are permanently denied, we cannot request permissions.');
-    // }
-
-    // return await Geolocator.getCurrentPosition();
   }
 
   final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
@@ -56,24 +43,23 @@ class _CustomMapState extends State<CustomMap> {
     target: LatLng(30.4434592, 31.6877141),
     zoom: 7.5,
   );
-  List<Marker> markers = [
-    const Marker(markerId: MarkerId('1'), position: LatLng(30.3333333, 31.4444444)),
-    const Marker(markerId: MarkerId('2'), position: LatLng(30.6666666, 31.6666666)),
-    const Marker(markerId: MarkerId('3'), position: LatLng(30.8888888, 31.8888888)),
-  ];
+
 // init state
   @override
   void initState() {
     _determinePosition();
+    initMarkers();
     super.initState();
   }
+
+  Set<Marker> markers = <Marker>{};
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       child: GoogleMap(
-        markers: markers.toSet(),
+        markers: markers,
         mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
@@ -81,5 +67,18 @@ class _CustomMapState extends State<CustomMap> {
         },
       ),
     );
+  }
+
+  void initMarkers() {
+    var myMarkers = places
+        .map(
+          (toElement) => Marker(
+            infoWindow: InfoWindow(title: toElement.name),
+            markerId: MarkerId(toElement.id.toString()),
+            position: toElement.latLng,
+          ),
+        )
+        .toSet();
+    markers.addAll(myMarkers);
   }
 }
