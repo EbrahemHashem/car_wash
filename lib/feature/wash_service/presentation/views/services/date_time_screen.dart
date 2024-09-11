@@ -4,7 +4,7 @@ import 'package:car_wash/core/utilities/app_color.dart';
 import 'package:car_wash/feature/wash_service/presentation/views/services/service_screen.dart';
 import 'package:car_wash/feature/wash_service/presentation/widgets/custom_calender.dart';
 import 'package:car_wash/feature/wash_service/presentation/widgets/custom_column.dart';
-import 'package:car_wash/feature/wash_service/presentation/widgets/custom_next_button.dart';
+// import 'package:car_wash/feature/wash_service/presentation/widgets/custom_next_button.dart';
 import 'package:car_wash/feature/wash_service/presentation/widgets/custom_time.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +98,7 @@ class DateTimeScreen extends StatelessWidget {
               const SizedBox(height: 8),
               // cusotm time
               const CustomTime(),
+
               //   Padding(
               //     padding: const EdgeInsets.only(top: 25),
               //     child: CustomNextButton(
