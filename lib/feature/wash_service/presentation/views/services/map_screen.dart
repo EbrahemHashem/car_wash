@@ -101,8 +101,8 @@ class _MapScreenState extends State<MapScreen> {
               //   ),
               // ),
 
-              const Padding(
-                padding: EdgeInsets.only(top: 25),
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
                 child: CustomNextButton(),
               ),
             ],

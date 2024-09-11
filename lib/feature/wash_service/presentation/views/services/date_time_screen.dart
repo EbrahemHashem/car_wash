@@ -97,18 +97,16 @@ class DateTimeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               // cusotm time
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomTime(text: '11:30 AM'),
-                  CustomTime(text: '12:30 AM'),
-                  CustomTime(text: '14:00 PM'),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 25),
-                child: CustomNextButton(),
-              ),
+              const CustomTime(),
+              //   Padding(
+              //     padding: const EdgeInsets.only(top: 25),
+              //     child: CustomNextButton(
+              //       onTap: () {},
+              //       validator: (p0) {
+              //         return null;
+              //       },
+              //     ),
+              //   ),
             ],
           ),
         ),
